@@ -1,0 +1,30 @@
+<div class="login-container d-flex align-items-center justify-content-center vh-100 bg-light">
+  <div class="card shadow-lg border-0 rounded-4 p-5" style="width: 400px;">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">YOURLOGO</h2>
+      <p class="text-muted">กรุณาเข้าสู่ระบบเพื่อใช้งาน</p>
+    </div>
+
+    <form>
+      <div class="mb-3">
+        <label class="form-label small fw-bold text-muted">USERNAME</label>
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0"><i class="bi bi-person text-muted"></i></span>
+          <input type="text" [(ngModel)]="username" name="username" class="form-control border-start-0 ps-0" placeholder="กรอกชื่อผู้ใช้">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label small fw-bold text-muted">PASSWORD</label>
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0"><i class="bi bi-lock text-muted"></i></span>
+          <input type="password" [(ngModel)]="password" name="password" class="form-control border-start-0 ps-0" placeholder="กรอกรหัสผ่าน">
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary w-100 py-2 rounded-pill fw-bold shadow-sm" (click)="onLogin()">
+        Login
+      </button>
+    </form>
+  </div>
+</div>

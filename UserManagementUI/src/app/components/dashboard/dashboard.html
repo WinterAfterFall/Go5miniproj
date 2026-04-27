@@ -1,0 +1,64 @@
+<div class="d-flex" id="wrapper">
+  <div class="bg-white border-end" id="sidebar-wrapper">
+    <div class="sidebar-heading p-4 fw-bold fs-4 text-primary text-center">YOURLOGO</div>
+    <div class="list-group list-group-flush px-3">
+      <a routerLink="/dashboard/home" routerLinkActive="active" class="list-group-item border-0 rounded-3 mb-1">
+        <i class="bi bi-grid me-3"></i> Dashboard
+      </a>
+      <a routerLink="/dashboard/users" routerLinkActive="active" class="list-group-item border-0 rounded-3 mb-1">
+        <i class="bi bi-people me-3"></i> Users
+      </a>
+      <a class="list-group-item border-0 rounded-3 mb-1"><i class="bi bi-file-earmark-text me-3"></i> Documents</a>
+      <a class="list-group-item border-0 rounded-3 mb-1"><i class="bi bi-image me-3"></i> Photos</a>
+      <a class="list-group-item border-0 rounded-3 mb-4"><i class="bi bi-person-lines-fill me-3"></i> Hierarchy</a>
+      
+      <div class="mt-4 pt-4 border-top">
+        <a class="list-group-item border-0 rounded-3 mb-1"><i class="bi bi-chat-left-text me-3"></i> Message</a>
+        <a class="list-group-item border-0 rounded-3 mb-1"><i class="bi bi-gear me-3"></i> Setting</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-content-wrapper" class="w-100 bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4 py-2 shadow-sm">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div>
+        <h5 class="mb-0 fw-bold text-dark">
+            Hello, {{ currentUser?.firstName || currentUser?.username || 'User' }}
+        </h5>
+        <small class="text-muted">Have a nice day</small>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+        <div class="cursor-pointer p-2">
+            <i class="bi bi-bell fs-5 text-muted"></i>
+        </div>
+        
+        <div class="vr mx-2 text-light" style="height: 30px; opacity: 0.5;"></div>
+        
+        <div class="text-end d-none d-md-block">
+            <div class="fw-bold small text-dark" style="line-height: 1.2;">
+                {{ currentUser?.firstName }} {{ currentUser?.lastName }}
+            </div>
+            <div class="text-muted" style="font-size: 11px;">
+                {{ currentUser?.roleType }}
+            </div>
+        </div>
+
+        <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" 
+            style="width: 42px; height: 42px; cursor: pointer; border: 2px solid white;">
+            {{ (currentUser?.firstName?.charAt(0) || currentUser?.username?.charAt(0) || 'U').toUpperCase() }}
+        </div>
+        
+        <div class="dropdown">
+            <i class="bi bi-chevron-down small text-muted cursor-pointer" (click)="onLogout()"></i>
+        </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid p-4" style="min-height: calc(100vh - 70px);">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

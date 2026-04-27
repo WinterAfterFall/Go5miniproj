@@ -1,0 +1,151 @@
+<div class="users-container p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4 gap-3">
+    <h2 class="fw-bold text-primary">Users Dashboard</h2>
+    <button class="btn btn-primary px-4 py-2 rounded-3 fw-bold shadow-sm" 
+            data-bs-toggle="modal" 
+            data-bs-target="#addUserModal">
+      Add user <i class="bi bi-plus-lg ms-2"></i>
+    </button>
+  </div>
+
+  <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="card-header bg-white py-3 border-0">
+      <h6 class="mb-0 fw-bold">List Users</h6>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light text-muted small text-uppercase">
+          <tr>
+            <th class="ps-4 py-3">Name</th>
+            <th>Create Date</th>
+            <th>Role</th>
+            <th class="text-end pe-4">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td class="ps-4 py-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="user-avatar bg-primary-subtle text-primary fw-bold">
+                  {{ user.firstName?.charAt(0) }}
+                </div>
+                <div>
+                  <div class="fw-bold text-dark">{{ user.firstName }} {{ user.lastName }}</div>
+                  <small class="text-muted">{{ user.email }}</small>
+                </div>
+              </div>
+            </td>
+            <td class="text-muted">{{ user.createDate | date:'dd MMM, yyyy' }}</td>
+            <td>
+              <span class="badge rounded-pill px-3 py-2" 
+                    [ngClass]="user.roleType === 'Admin' ? 'bg-info-subtle text-info' : 'bg-light text-muted'">
+                {{ user.roleType || 'Employee' }}
+              </span>
+            </td>
+            <td class="text-end pe-4">
+              <button class="btn btn-link text-muted p-1">
+                <i class="bi bi-pencil"></i>
+              </button>
+              
+              <button class="btn btn-link text-danger p-1" (click)="deleteUser(user.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="users.length === 0">
+            <td colspan="4" class="text-center py-5 text-muted">No users found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header border-0 pt-4 px-4">
+        <h5 class="modal-title fw-bold fs-4">Add User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label small fw-bold">User ID <span class="text-danger">*</span></label>
+              <input type="text" formControlName="userId" class="form-control bg-light border-0">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">First Name <span class="text-danger">*</span></label>
+              <input type="text" formControlName="firstName" class="form-control bg-light border-0">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Last Name <span class="text-danger">*</span></label>
+              <input type="text" formControlName="lastName" class="form-control bg-light border-0">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Email ID <span class="text-danger">*</span></label>
+              <input type="email" formControlName="email" class="form-control bg-light border-0">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Mobile No <span class="text-danger">*</span></label>
+              <input type="text" formControlName="mobileNo" class="form-control bg-light border-0">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Select Role Type <span class="text-danger">*</span></label>
+              <select formControlName="roleType" class="form-select bg-light border-0">
+                <option value="SuperAdmin">Super Admin</option>
+                <option value="Admin">Admin</option>
+                <option value="HRAdmin">HR Admin</option>
+                <option value="Employee">Employee</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Username <span class="text-danger">*</span></label>
+              <input type="text" formControlName="username" class="form-control bg-light border-0">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Password <span class="text-danger">*</span></label>
+              <input type="password" formControlName="password" class="form-control bg-light border-0">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Confirm Password <span class="text-danger">*</span></label>
+              <input type="password" formControlName="confirmPassword" class="form-control bg-light border-0">
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <h6 class="fw-bold mb-3">Module Permission</h6>
+            <div class="table-responsive">
+              <table class="table table-borderless align-middle">
+                <thead>
+                  <tr class="text-muted small">
+                    <th>Module Name</th>
+                    <th class="text-center">Read</th>
+                    <th class="text-center">Write</th>
+                    <th class="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let roleName of ['Super Admin', 'Admin', 'Employee']">
+                    <td>{{ roleName }}</td>
+                    <td class="text-center"><input type="checkbox" class="form-check-input"></td>
+                    <td class="text-center"><input type="checkbox" class="form-check-input"></td>
+                    <td class="text-center"><input type="checkbox" class="form-check-input"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 mt-4 pb-3">
+            <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary px-4 fw-bold shadow-sm" [disabled]="userForm.invalid">
+              Add User
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table thead th {
+  background-color: #f8fafd !important; 
+  color: #a3abb9 !important;         
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;   
+  border-bottom: none;
+  padding: 15px 10px;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.table tbody td {
+  padding: 12px 10px;
+  border: none;
+}
+
+.card {
+  border: none;
+}
+
+.btn-primary {
+  background-color: #5d87ff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #4573f1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.modal-content {
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.form-control.bg-light, .form-select.bg-light {
+  background-color: #f8fafd !important;
+  border: 1px solid transparent;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #ffffff !important;
+  border-color: #5d87ff;
+  box-shadow: 0 0 0 3px rgba(93, 135, 255, 0.1);
+  outline: none;
+}
+
+.text-danger {
+  color: #fa896b !important; 
+}
+
+.form-check-input:checked {
+  background-color: #5d87ff;
+  border-color: #5d87ff;
+}
+
+.btn-light {
+  background-color: #f1f3f5;
+  border: none;
+  color: #5a6a85;
+}
+
+.btn-light:hover {
+  background-color: #e2e6ea;
+}
+
+.form-label {
+  margin-bottom: 0.4rem;
+  color: #5a6a85;
+}
+
+.text-danger:hover {
+  color: #cf2222 !important;
+  transform: scale(1.1);
+  display: inline-block;
+}
